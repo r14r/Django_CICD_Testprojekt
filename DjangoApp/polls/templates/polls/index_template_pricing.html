@@ -1,0 +1,38 @@
+<!-- <MAIN>/polls/templates/polls/index.html: START -->
+
+{% extends 'polls/base.html' %}
+
+{% block title %}Django Tutorial{% endblock title %}
+{% block nav-style %}mkt-nav{% endblock nav-style %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1 class="display-4">Django Tutorial</h1>
+    <p class="lead">A simple Poll-App with Bootstrap and Angular.</p>
+</div>
+
+{% if latest_question_list %}
+    <div class="card-deck mb-3 text-center">
+        {% for question in latest_question_list %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ question.question_text }}</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">- <small class="text-muted">/ -</small></h1>
+                <ul class="list-unstyled mt-3 mb-4"></ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">
+                    <a href="{% url 'polls:detail' question.id %}">Vote</a>
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+<p>No polls are available.</p>
+{% endif %}
+
+{% endblock content %}
+
+<!-- <MAIN>/polls/templates/polls/index.html: DONE -->

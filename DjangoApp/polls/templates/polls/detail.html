@@ -1,0 +1,38 @@
+{% extends 'polls/base.html' %}
+
+{% block title %}Detail{% endblock title %}
+{% block nav-style %}mkt-nav{% endblock nav-style %}
+
+{% block content %}
+
+<div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">{{ question.question_text }}</h1>
+        </div>
+</div>
+    
+<div class="container">
+    {% if error_message %}
+    <div class="row">
+        <div class="col-md-4">
+          <h2>{{ error_message }}</h2>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-4">
+            <form action="{% url 'polls:vote' question.id %}" method="post">
+            {% csrf_token %}
+            {% for choice in question.choice_set.all %}
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            {% endfor %}
+            <input class="btn btn-secondary" type="submit" value="Vote &raquo;">
+            </form>
+        </div>
+    </div>
+
+    <hr>
+</div>
+{% endblock content %}
