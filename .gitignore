@@ -1,4 +1,5 @@
-**/.env.d
+**/.env.python
+**/.env.node
 
 # Django #
 *.log
