@@ -3,3 +3,7 @@ djangorestframework
 django-cors-headers
 
 pytest
+
+
+isort
+black
