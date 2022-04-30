@@ -39,22 +39,22 @@ REPLACE()
    rm -f "${_FILE}.bak"
 }
 
-#LOG "working on branch $_BRANCH"
+LOG "working on branch $_BRANCH"
 
 for _FILE in $(git diff-index --name-status --cached HEAD | grep -v ^D | cut -c3-)
 do
-    # LOG "checking: $_FILE"
+     LOG "checking: $_FILE"
 
     # Only examine known text files
     if [[ "$_FILE" =~ [.](py)$ ]]; then
-        # LOG "Working on file: $_FILE"
+        LOG "Working on file: $_FILE"
 
         REPLACE PYTHON TAG       "$_BRANCHNAME" "$_FILE"
         REPLACE PYTHON TIMESTAMP "$_TIMESTAMP"  "$_FILE"
     fi
 
     if [[ "$_FILE" =~ [.](js|ts)$ ]]; then
-        # LOG "Working on file: $_FILE"
+        LOG "Working on file: $_FILE"
         REPLACE JAVASCRIPT TAG       "$_BRANCH"    "$_FILE"
         REPLACE JAVASCRIPT TIMESTAMP "$_TIMESTAMP" "$_FILE"
     fi
