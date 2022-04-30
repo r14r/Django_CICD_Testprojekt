@@ -1,8 +1,17 @@
 {
-  "python.pythonPath": ".env/python/bin/python",
+  "python.defaultInterpreterPath": ".env/python/bin/python",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
   "files.exclude": {
-    ".env": true
-  }
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    ".env": true,
+    "**/.pytest_cache": true,
+    "**/.env.python": true
+  },
+  "explorerExclude.backup": null
 }
