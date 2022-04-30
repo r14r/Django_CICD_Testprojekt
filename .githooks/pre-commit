@@ -6,17 +6,17 @@ _BRANCHNAME=${_BRANCHPATH##*/}
 
 _TIMESTAMP="$(date '+%Y-%m-%d %H:%M:%S')"
 
-echo "HOOK      : $0"
-echo "PARAMETER : '$*''"
-echo "BRANCHPATH: $_BRANCHPATH"
-echo "BRANCHNAME: $_BRANCHNAME"
+#echo "HOOK      : $0"
+#echo "PARAMETER : '$*''"
+#echo "BRANCHPATH: $_BRANCHPATH"
+#echo "BRANCHNAME: $_BRANCHNAME"
 
 GIT_COMMIT_DETAILED_LOGGING=${GIT_COMMIT_DETAILED_LOGGING:-YES}
 
 LOG() {
-    if [[ "$GIT_COMMIT_DETAILED_LOGGING" == "YES" ]]; then
-        echo "LOG: $*"
-    fi
+    [ "YES" = "$GIT_COMMIT_DETAILED_LOGGING" ] && return
+
+    echo "LOG: $*"
 }
 
 REPLACE()
@@ -39,21 +39,21 @@ REPLACE()
    rm -f "${_FILE}.bak"
 }
 
-LOG "working on branch $_BRANCH"
+# LOG "working on branch $_BRANCH"
 
 for _FILE in $(git diff-index --name-status --cached HEAD | grep -v ^D | cut -c3-)
 do
-     LOG "checking: $_FILE"
+    LOG "checking: $_FILE"
 
     # Only examine known text files
-    if [[ "$_FILE" =~ [.](py)$ ]]; then
+    if [[ "$_FILE" =~ "^[.](py)$" ]]; then
         LOG "Working on file: $_FILE"
 
         REPLACE PYTHON TAG       "$_BRANCHNAME" "$_FILE"
         REPLACE PYTHON TIMESTAMP "$_TIMESTAMP"  "$_FILE"
     fi
 
-    if [[ "$_FILE" =~ [.](js|ts)$ ]]; then
+    if [[ "$_FILE" =~ "[.](js|ts)$" ]]; then
         LOG "Working on file: $_FILE"
         REPLACE JAVASCRIPT TAG       "$_BRANCH"    "$_FILE"
         REPLACE JAVASCRIPT TIMESTAMP "$_TIMESTAMP" "$_FILE"
