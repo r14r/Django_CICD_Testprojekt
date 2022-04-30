@@ -3,6 +3,8 @@
 import os
 import sys
 
+__DEPLOY_TAG="Deploy Tag"
+__DEPLOY_TIMESTAMP="Timestamp"
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'main.settings')
